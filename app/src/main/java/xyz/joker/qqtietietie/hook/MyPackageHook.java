@@ -1,6 +1,7 @@
-package hdfg159.qqsendpoke.hook;
+package xyz.joker.qqtietietie.hook;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -21,6 +22,7 @@ class MyPackageHook {
     }
 
     public void initAndHook() {
+        XposedBridge.log("QQSendPokeHook:"+loadPackageParam.toString());
         if (isQQSendPokePackage(loadPackageParam)) {
             findAndHookMethod(CLASSNAME_MAIN, loadPackageParam.classLoader, METHOD_NAME_IS_MODULE_ACTIVE, new XC_MethodHook() {
                 @Override

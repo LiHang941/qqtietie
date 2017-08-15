@@ -1,4 +1,4 @@
-package hdfg159.qqsendpoke.view;
+package xyz.joker.qqtietietie.view;
 
 
 import android.app.ActionBar;
@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.view.MenuItem;
+import xyz.joker.qqtietietie.utilities.XSharedPreferencesUtil;
+import joker.qqtietietie.R;
 
-import hdfg159.qqsendpoke.R;
-import hdfg159.qqsendpoke.utilities.XSharedPreferencesUtil;
 
 public class Settings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 

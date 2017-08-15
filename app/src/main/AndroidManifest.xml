@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hdfg159.qqsendpoke">
+    package="joker.qqtietietie"
+
+
+    >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -11,18 +14,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="解除手机QQ戳一戳次数限制" />
+            android:value="表情贴贴贴" />
         <meta-data
             android:name="xposedminversion"
             android:value="30" />
 
-        <activity android:name=".view.Main">
+        <activity android:name="xyz.joker.qqtietietie.view.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +39,7 @@
             android:enabled="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:targetActivity=".view.Main">
+            android:targetActivity="xyz.joker.qqtietietie.view.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +48,7 @@
         </activity-alias>
 
         <activity
-            android:name=".view.Settings"
+            android:name="xyz.joker.qqtietietie.view.Settings"
             android:label="@string/title_activity_settings" />
     </application>
 

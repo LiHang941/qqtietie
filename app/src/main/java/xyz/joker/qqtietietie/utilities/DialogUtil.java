@@ -1,4 +1,4 @@
-package hdfg159.qqsendpoke.utilities;
+package xyz.joker.qqtietietie.utilities;
 
 import android.app.Activity;
 import android.app.AlertDialog;

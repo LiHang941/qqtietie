@@ -12,9 +12,10 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             zipAlignEnabled true
+            debuggable false
         }
     }
     productFlavors {
@@ -25,4 +26,5 @@ dependencies {
     provided fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     provided files('libs/XposedBridgeApi-54.jar')
+    compile 'com.google.code.gson:gson:2.8.1'
 }

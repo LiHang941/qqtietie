@@ -1,4 +1,4 @@
-package hdfg159.qqsendpoke.view;
+package xyz.joker.qqtietietie.view;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -19,10 +19,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import joker.qqtietietie.R;
+import xyz.joker.qqtietietie.utilities.DialogUtil;
+import xyz.joker.qqtietietie.utilities.ToastUtil;
 
-import hdfg159.qqsendpoke.R;
-import hdfg159.qqsendpoke.utilities.DialogUtil;
-import hdfg159.qqsendpoke.utilities.ToastUtil;
 
 public class Main extends Activity implements View.OnClickListener {
     private Button btnDisplayIcon;
@@ -139,7 +139,7 @@ public class Main extends Activity implements View.OnClickListener {
     }
 
     private ComponentName getIconComponentName() {
-        return new ComponentName(this, "hdfg159.qqsendpoke.view.Main-Alias");
+        return new ComponentName(this, "joker.qqtietietie.view.Main-Alias");
     }
 
     private boolean isDisplayIcon() {

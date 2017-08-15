@@ -1,4 +1,4 @@
-package hdfg159.qqsendpoke.hook;
+package xyz.joker.qqtietietie.hook;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
@@ -12,8 +12,9 @@ public class PokeMsgHook implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(LoadPackageParam loadPackageParam) throws Throwable {
-        new MyPackageHook(loadPackageParam).initAndHook();
-        new QQSendPokeHook(loadPackageParam).initAndHook();
+ //       new MyPackageHook(loadPackageParam).initAndHook();
+//        new QQSendPokeHook(loadPackageParam).initAndHook();
+        new StickerMsgHook(loadPackageParam).initAndHook();
     }
 
 }

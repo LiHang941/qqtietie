@@ -1,4 +1,4 @@
-package hdfg159.qqsendpoke.hook;
+package xyz.joker.qqtietietie.hook;
 
 import android.app.Activity;
 import android.app.Application;
@@ -12,7 +12,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import hdfg159.qqsendpoke.utilities.XSharedPreferencesUtil;
+import xyz.joker.qqtietietie.utilities.XSharedPreferencesUtil;
 
 import static de.robv.android.xposed.XposedBridge.invokeOriginalMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -42,6 +42,7 @@ class QQSendPokeHook {
             findAndHookMethod(Application.class, "dispatchActivityResumed", Activity.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    XposedBridge.log("QQSendPokeHook123123:"+loadPackageParam.toString());
                     sendPokeHook(loadPackageParam);
                 }
             });
@@ -49,7 +50,9 @@ class QQSendPokeHook {
     }
 
     private void sendPokeHook(final XC_LoadPackage.LoadPackageParam loadPackageParam) {
+        //解锁
         unlockPokeTimes(loadPackageParam);
+        //戳多次
         pokeMoreTimes(loadPackageParam);
     }
 

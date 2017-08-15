@@ -15,7 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
--keep public class hdfg159.qqsendpoke.hook.PokeMsgHook
--keep public class hdfg159.qqsendpoke.view.Main{
+-keep public class xyz.joker.qqtietietie.hook.PokeMsgHook
+-keep public class xyz.joker.qqtietietie.view.Main{
     private boolean isModuleActive();
 }

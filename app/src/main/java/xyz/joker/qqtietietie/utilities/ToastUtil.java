@@ -1,4 +1,4 @@
-package hdfg159.qqsendpoke.utilities;
+package xyz.joker.qqtietietie.utilities;
 
 import android.content.Context;
 import android.widget.Toast;
