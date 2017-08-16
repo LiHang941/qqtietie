@@ -1,4 +1,4 @@
-package xyz.joker.qqtietietie.utilities;
+package xyz.joker.qqtietietie.utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 

@@ -1,20 +1,20 @@
 package xyz.joker.qqtietietie.hook;
 
+import java.io.File;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 /**
- * Project:QQSendPoke
- * Package:hdfg159.qqsendpoke
- * Created by hdfg159 on 2016/7/24 18:32.
+ *
  */
 public class PokeMsgHook implements IXposedHookLoadPackage {
-
+    File file = null;
     @Override
     public void handleLoadPackage(LoadPackageParam loadPackageParam) throws Throwable {
- //       new MyPackageHook(loadPackageParam).initAndHook();
-//        new QQSendPokeHook(loadPackageParam).initAndHook();
-        new StickerMsgHook(loadPackageParam).initAndHook();
+        new QQTieTieTiePackageHook(loadPackageParam).initAndHook();
+        new StickerMsgHook().initAndHook(loadPackageParam);
     }
+
 
 }

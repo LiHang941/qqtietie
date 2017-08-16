@@ -1,4 +1,4 @@
-package xyz.joker.qqtietietie.utilities;
+package xyz.joker.qqtietietie.utils;
 
 import java.lang.reflect.Field;
 

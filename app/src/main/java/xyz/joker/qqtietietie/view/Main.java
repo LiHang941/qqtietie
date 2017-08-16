@@ -2,65 +2,35 @@ package xyz.joker.qqtietietie.view;
 
 import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.util.Linkify;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import java.util.regex.Pattern;
 import joker.qqtietietie.R;
-import xyz.joker.qqtietietie.utilities.DialogUtil;
-import xyz.joker.qqtietietie.utilities.ToastUtil;
+import xyz.joker.qqtietietie.utils.DialogUtil;
 
 
-public class Main extends Activity implements View.OnClickListener {
-    private Button btnDisplayIcon;
-
+public class Main extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toggleDisplayIcon(isDisplayIcon());
         initView();
     }
 
-    private void toggleDisplayIcon(boolean displayIcon) {
-        writeInSP(displayIcon);
-        PackageManager packageManager = getPackageManager();
-        int state = displayIcon ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-        packageManager.setComponentEnabledSetting(getIconComponentName(), state,
-                PackageManager.DONT_KILL_APP);
-    }
 
-    private void writeInSP(boolean displayIcon) {
-        getSharedPreferences("SendPokeMain", Context.MODE_PRIVATE).edit().putBoolean("isDisplayIcon", displayIcon).commit();
-    }
+
 
     private void initView() {
         showMoudleState();
         TextView mainContent = (TextView) findViewById(R.id.mainContent);
-        Linkify.addLinks(mainContent, Linkify.ALL);
-        btnDisplayIcon = (Button) findViewById(R.id.btndisplayicon);
-        btnDisplayIcon.setOnClickListener(this);
-        Button btnAbout = (Button) findViewById(R.id.btnabout);
-        btnAbout.setOnClickListener(this);
-        ImageView payPicture = (ImageView) findViewById(R.id.imageView);
-        payPicture.setOnClickListener(this);
-        Button btnSetting = (Button) findViewById(R.id.btnsetting);
-        btnSetting.setOnClickListener(this);
-        setBtnTitle();
+        int flags = Pattern.CASE_INSENSITIVE;
+        Pattern p = Pattern.compile("http://www.lihang.xyz/", flags);
+        Pattern p2 = Pattern.compile("https://github.com/wawa2222/qqtietie", flags);
+        Linkify.addLinks(mainContent, p, "http://www.lihang.xyz/");
+        Linkify.addLinks(mainContent, p2, "https://github.com/wawa2222/qqtietie");
     }
 
     private void showMoudleState() {
@@ -73,62 +43,14 @@ public class Main extends Activity implements View.OnClickListener {
             });
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btndisplayicon:
-                toggleDisplayIcon(!isDisplayIcon());
-                setBtnTitle();
-                break;
-            case R.id.btnabout:
-                ToastUtil.showToast(this, R.string.aboutContent, Toast.LENGTH_LONG);
-                break;
-            case R.id.imageView:
-                savePicture();
-                break;
-            case R.id.btnsetting:
-                openSetting();
-                break;
-            default:
-                break;
-        }
-    }
-
+    /**
+     * Xposed拦截
+     * @return
+     */
     private boolean isModuleActive() {
         return false;
     }
 
-    private void openSetting() {
-        Intent intent = new Intent(this, Settings.class);
-        startActivity(intent);
-    }
-
-    private void savePicture() {
-        Bitmap alipayPicture = BitmapFactory.decodeResource(getResources(), R.drawable.wechatpay);
-        MediaStore.Images.Media.insertImage(getContentResolver(), alipayPicture, "time:" + System.currentTimeMillis(), "time:" + System.currentTimeMillis());
-        MediaScannerConnection.scanFile(this, new String[]{Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath(), Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()}, null, null);
-        DialogUtil.showAlertTwo(this, getString(R.string.thanks), getString(R.string.payPictureIsSave), "确定", null, getString(R.string.supportalipay), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                redirectToAlipay();
-            }
-        });
-    }
-
-    private void redirectToAlipay() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://QR.ALIPAY.COM/FKX01070B8ASXMQNRFY528"));
-        startActivity(intent);
-    }
-
-    private void setBtnTitle() {
-        if (isDisplayIcon()) {
-            btnDisplayIcon.setText(R.string.noicon);
-        } else {
-            btnDisplayIcon.setText(R.string.displayicon);
-        }
-    }
 
     private void redirectToXposed() {
         ComponentName componentName = new ComponentName("de.robv.android.xposed.installer",
@@ -138,13 +60,6 @@ public class Main extends Activity implements View.OnClickListener {
         startActivity(intent);
     }
 
-    private ComponentName getIconComponentName() {
-        return new ComponentName(this, "joker.qqtietietie.view.Main-Alias");
-    }
-
-    private boolean isDisplayIcon() {
-        return getSharedPreferences("SendPokeMain", Context.MODE_PRIVATE).getBoolean("isDisplayIcon", true);
-    }
 
     @Override
     protected void onDestroy() {

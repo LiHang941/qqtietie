@@ -29,7 +29,6 @@
         <activity android:name="xyz.joker.qqtietietie.view.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
             </intent-filter>
         </activity>
@@ -42,14 +41,10 @@
             android:targetActivity="xyz.joker.qqtietietie.view.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
 
-        <activity
-            android:name="xyz.joker.qqtietietie.view.Settings"
-            android:label="@string/title_activity_settings" />
     </application>
 
 </manifest>
