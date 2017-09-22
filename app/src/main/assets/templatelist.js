@@ -63,34 +63,22 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 435);
+/******/ 	return __webpack_require__(__webpack_require__.s = 438);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 247:
+/***/ 250:
 /***/ (function(module, exports) {
 
 module.exports = {
-  "company-item": {
-    "flexDirection": "row",
-    "position": "absolute",
-    "bottom": 0,
-    "width": 750
-  },
-  "company-title": {
-    "flex": 1,
-    "color": "#2F4056",
-    "textAlign": "center",
-    "fontSize": 25,
-    "marginBottom": 15
-  },
   "label-text": {
     "color": "#0F0F0D",
-    "fontSize": 35,
+    "fontSize": 30,
     "textAlign": "left",
     "textOverflow": "ellipsis",
-    "lineHeight": 35
+    "lineHeight": 35,
+    "width": 600
   },
   "body": {
     "flexDirection": "column",
@@ -119,81 +107,72 @@ module.exports = {
 
 /***/ }),
 
-/***/ 298:
+/***/ 301:
 /***/ (function(module, exports) {
 
 module.exports = {
-  "type": "container",
+  "type": "scroller",
+  "classList": [
+    "body"
+  ],
   "children": [
     {
-      "type": "scroller",
+      "type": "text",
       "classList": [
-        "body"
+        "label-text"
       ],
+      "style": {
+        "color": "#FF4500",
+        "marginTop": 20
+      },
+      "attr": {
+        "value": "说明"
+      }
+    },
+    {
+      "type": "text",
+      "classList": [
+        "label-text"
+      ],
+      "style": {
+        "fontSize": 25,
+        "marginTop": 20,
+        "marginBottom": 50
+      },
+      "attr": {
+        "value": "--这里给出的仅仅是一些基础的配置模板,下个版本将会推出网络模板，"
+      }
+    },
+    {
+      "type": "div",
+      "classList": [
+        "list"
+      ],
+      "repeat": {
+        "expression": function () {return this.items},
+        "value": "item"
+      },
+      "attr": {
+        "index": function () {return this.$index}
+      },
+      "events": {
+        "click": "click"
+      },
       "children": [
         {
           "type": "div",
           "classList": [
-            "list"
-          ],
-          "repeat": {
-            "expression": function () {return this.items},
-            "value": "item"
-          },
-          "attr": {
-            "index": function () {return this.$index}
-          },
-          "events": {
-            "click": "setting"
-          },
-          "children": [
-            {
-              "type": "div",
-              "classList": [
-                "list-div"
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "classList": [
-                    "label-text",
-                    "list-text"
-                  ],
-                  "attr": {
-                    "value": function () {return this.item.text}
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "image",
-          "attr": {
-            "src": "assets/images/weixin.jpg"
-          },
-          "classList": [
-            "img"
-          ],
-          "style": {
-            "width": 600,
-            "height": 600,
-            "marginTop": 50
-          }
-        },
-        {
-          "type": "div",
-          "classList": [
-            "company-item"
+            "list-div"
           ],
           "children": [
             {
               "type": "text",
               "classList": [
-                "company-title"
+                "label-text",
+                "list-text"
               ],
               "attr": {
-                "value": "Copyright©小航博客"
+                "value": function () {return this.item.text}
               }
             }
           ]
@@ -205,39 +184,25 @@ module.exports = {
 
 /***/ }),
 
-/***/ 350:
+/***/ 353:
 /***/ (function(module, exports) {
 
-module.exports = function(module, exports, __weex_require__){'use strict';
+module.exports = function(module, exports, __weex_require__){"use strict";
 
 var navigator = __weex_require__('@weex-module/navigator');
-var globalEvent = __weex_require__('@weex-module/globalEvent');
 module.exports = {
     data: function () {return {
-        items: [{ text: "贴表情设置", method: function method() {
-                var params = { 'url': "assets://setting.js", 'animated': 'true' };
-                navigator.push(params, function () {});
-            } }, { text: "贴表情模板", method: function method() {
-                var params = { 'url': "assets://templatelist.js", 'animated': 'true' };
-                navigator.push(params, function () {});
-            } }, { text: "检查更新", method: function method() {
-                __weex_require__('@weex-module/configModule').update();
-            } }, { text: "关于", method: function method() {
-                var params = { 'url': "assets://my.js", 'animated': 'true' };
-                navigator.push(params, function () {});
-            } }]
+        items: [{ text: "垂直", type: 1 }, { text: "水平", type: 2 }, { text: "右上", type: 3 }, { text: "右下", type: 4 }]
+
     }},
     methods: {
-        setting: function setting(e) {
+        click: function click(e) {
             var index = e.target.attr.index;
-            var item = this.items[index];
-            item.method();
+            var type = this.items[index].type;
+            var url = "assets://setting.js" + "?type=" + type;
+            var params = { 'url': url, 'animated': 'true' };
+            navigator.push(params, function () {});
         }
-    },
-    created: function created() {
-        globalEvent.addEventListener('androidback', function (e) {
-            navigator.pop({ 'animated': 'true' }, function () {});
-        });
     }
 };}
 /* generated by weex-loader */
@@ -245,14 +210,14 @@ module.exports = {
 
 /***/ }),
 
-/***/ 435:
+/***/ 438:
 /***/ (function(module, exports, __webpack_require__) {
 
-var __weex_template__ = __webpack_require__(298)
-var __weex_style__ = __webpack_require__(247)
-var __weex_script__ = __webpack_require__(350)
+var __weex_template__ = __webpack_require__(301)
+var __weex_style__ = __webpack_require__(250)
+var __weex_script__ = __webpack_require__(353)
 
-__weex_define__('@weex-component/a99677454f478e5e506e83b235e4bf89', [], function(__weex_require__, __weex_exports__, __weex_module__) {
+__weex_define__('@weex-component/90c57ab48263f10d1d8e2f47f0410de5', [], function(__weex_require__, __weex_exports__, __weex_module__) {
 
     __weex_script__(__weex_module__, __weex_exports__, __weex_require__)
     if (__weex_exports__.__esModule && __weex_exports__.default) {
@@ -265,7 +230,7 @@ __weex_define__('@weex-component/a99677454f478e5e506e83b235e4bf89', [], function
 
 })
 
-__weex_bootstrap__('@weex-component/a99677454f478e5e506e83b235e4bf89',undefined,undefined)
+__weex_bootstrap__('@weex-component/90c57ab48263f10d1d8e2f47f0410de5',undefined,undefined)
 
 /***/ })
 

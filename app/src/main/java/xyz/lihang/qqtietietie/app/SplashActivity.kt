@@ -1,11 +1,11 @@
-package xyz.lihang.qqtietietie.weex
-
+package xyz.lihang.qqtietietie.app
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 
 import xyz.lihang.qqtietietie.R
+import xyz.lihang.qqtietietie.app.navigation.NavigationManager
 import xyz.lihang.qqtietietie.utils.AppUtils
 import xyz.lihang.qqtietietie.utils.DialogUtil
 
@@ -14,6 +14,13 @@ import xyz.lihang.qqtietietie.utils.DialogUtil
  */
 
 class SplashActivity : Activity() {
+    companion object {
+        private const val SPLASH_DISPLAY_MILLIS = 500L
+    }
+
+    private val mNavigateHandler = android.os.Handler()
+    private var mStartMillis = 0L
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +47,16 @@ class SplashActivity : Activity() {
         } else {
             toMain()
         }
-
     }
 
     private fun toMain() {
-        val intent = Intent(this@SplashActivity, MainActivity::class.java)
-
-        startActivity(intent)
+        mNavigateHandler.run {
+            removeCallbacksAndMessages(null)
+            postDelayed({ NavigationManager.navigate(this@SplashActivity, ManagementApplication.Companion.SCHEMA_PAGE_MAIN) }
+                    , Math.max(0, SplashActivity.Companion.SPLASH_DISPLAY_MILLIS + mStartMillis - System.currentTimeMillis()))
+        }
+//        val intent = Intent(this@SplashActivity, ComponentActivity::class.java)
+//        startActivity(intent)
     }
 
 }

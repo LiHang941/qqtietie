@@ -1,4 +1,4 @@
-package xyz.lihang.qqtietietie.model;
+package xyz.lihang.qqtietietie.utils.model;
 
 /**
  * Created by LiHang on 2017/9/21.

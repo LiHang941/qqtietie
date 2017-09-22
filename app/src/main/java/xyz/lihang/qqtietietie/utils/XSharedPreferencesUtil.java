@@ -9,6 +9,8 @@ import xyz.lihang.qqtietietie.Constant;
 public class XSharedPreferencesUtil {
 
     public  static XSharedPreferences getXSharedPreferences(String name){
-        return new XSharedPreferences(Constant.packName,name);
+        XSharedPreferences xSharedPreferences = new XSharedPreferences(Constant.packName, name);
+        xSharedPreferences.makeWorldReadable();
+        return xSharedPreferences;
     }
 }

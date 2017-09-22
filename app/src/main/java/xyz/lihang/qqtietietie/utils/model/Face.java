@@ -1,4 +1,4 @@
-package xyz.lihang.qqtietietie.model;
+package xyz.lihang.qqtietietie.utils.model;
 
 
 /**

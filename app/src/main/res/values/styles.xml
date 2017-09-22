@@ -1,3 +1,21 @@
 <resources>
-    <style name="AppTheme" parent="android:Theme.DeviceDefault" />
+
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MainTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:immersive">true</item>
+    </style>
+
+    <style name="FullScreenDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <!-- No backgrounds, titles or window float -->
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
 </resources>

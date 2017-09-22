@@ -5,6 +5,12 @@
     <string name="open_xposed">打开Xposed框架</string>
     <string name="ignore">忽略</string>
     <string name="main_button">设置</string>
+
     <string name="reload">重新加载</string>
     <string name="load_page_error">加载页面出错！</string>
+    <string name="input_icon_url">输入图标资源路径</string>
+    <string name="input_app_url">输入应用页面路径</string>
+    <string name="app_url">应用页面</string>
+    <string name="icon_url">图标资源</string>
+
 </resources>

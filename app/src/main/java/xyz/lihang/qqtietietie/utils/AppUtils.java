@@ -9,8 +9,7 @@ import android.content.pm.PackageManager;
 import com.allenliu.versionchecklib.core.AllenChecker;
 import com.allenliu.versionchecklib.core.VersionParams;
 import com.allenliu.versionchecklib.core.http.HttpRequestMethod;
-
-import xyz.lihang.qqtietietie.service.UpdateService;
+import xyz.lihang.qqtietietie.app.UpdateService;
 
 /**
  * Created by LiHang on 2017/9/20.
@@ -41,7 +40,8 @@ public class AppUtils {
         VersionParams.Builder builder = new VersionParams.Builder()
                 .setRequestMethod(HttpRequestMethod.GET)
                 .setRequestUrl(updateUrl)
-                .setService(UpdateService.class);
+                .setService(UpdateService.class)
+                ;
         AllenChecker.startVersionCheck(context, builder.build());
     }
 

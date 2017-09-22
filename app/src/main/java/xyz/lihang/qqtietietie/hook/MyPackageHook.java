@@ -2,6 +2,7 @@ package xyz.lihang.qqtietietie.hook;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import xyz.lihang.qqtietietie.Constant;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
@@ -11,8 +12,8 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 class MyPackageHook {
     private static final String METHOD_NAME_IS_MODULE_ACTIVE = "isModuleActive";
     private final XC_LoadPackage.LoadPackageParam loadPackageParam;
-    private static final String PACKAGENAME = "xyz.lihang.qqtietietie";
-    private static final String CLASSNAME_MAIN = "xyz.lihang.qqtietietie.weex.SplashActivity";
+    private static final String PACKAGENAME = Constant.packName;
+    private static final String CLASSNAME_MAIN = "xyz.lihang.qqtietietie.app.SplashActivity";
 
     public MyPackageHook(XC_LoadPackage.LoadPackageParam loadPackageParam) {
         this.loadPackageParam = loadPackageParam;

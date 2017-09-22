@@ -5,7 +5,6 @@ import android.app.Application;
 
 import com.alibaba.fastjson.JSON;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.ExecutorService;
@@ -15,11 +14,9 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import xyz.lihang.qqtietietie.Constant;
-import xyz.lihang.qqtietietie.model.Face;
-import xyz.lihang.qqtietietie.model.ParesFactory;
 import xyz.lihang.qqtietietie.utils.BeanUtils;
-import xyz.lihang.qqtietietie.utils.XSharedPreferencesUtil;
+import xyz.lihang.qqtietietie.utils.model.Face;
+import xyz.lihang.qqtietietie.utils.model.ParesFactory;
 
 import static de.robv.android.xposed.XposedBridge.invokeOriginalMethod;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -68,7 +65,6 @@ public class StickerMsgHook {
             @Override
             protected Object replaceHookedMethod(final MethodHookParam methodHookParam) throws Throwable {
                 try {
-                    log("自带表情", methodHookParam);
                     Object object = methodHookParam.args[1].getClass().newInstance();
                     BeanUtils.copyProperty(methodHookParam.args[1], object);
                     sendTie(methodHookParam);
@@ -83,7 +79,6 @@ public class StickerMsgHook {
             @Override
             protected Object replaceHookedMethod(final MethodHookParam methodHookParam) throws Throwable {
                 try {
-                    log("其他表情",methodHookParam);
                     if(methodHookParam.args[methodHookParam.args.length-1] != null){
                         sendTie(methodHookParam);
                         return null;
@@ -98,23 +93,23 @@ public class StickerMsgHook {
         });
     }
     private void log (String str ,XC_MethodHook.MethodHookParam methodHookParam){
-        XposedBridge.log(str + "Hook方法:"+methodHookParam.method.getName());
-        XposedBridge.log(str + "Hook拦截对象:"+methodHookParam.thisObject);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(str + "Hook参数长度 : "+ methodHookParam.args.length);
-        for(int i=0;i<methodHookParam.args.length;i++){
-            sb.append("\n--"+i+"---");
-            if(methodHookParam.args[i]!=null){
-                sb.append(methodHookParam.args[i].getClass()+"---" );
-                try {
-                    sb.append(JSON.toJSONString(methodHookParam.args[i]));
-                }catch (Exception e){
-                    sb.append(methodHookParam.args[i].toString());
-                }
-            }
-        }
-        XposedBridge.log(str + "Hook参数:"+ sb.toString());
+//        XposedBridge.log(str + "Hook方法:"+methodHookParam.method.getName());
+//        XposedBridge.log(str + "Hook拦截对象:"+methodHookParam.thisObject);
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(str + "Hook参数长度 : "+ methodHookParam.args.length);
+//        for(int i=0;i<methodHookParam.args.length;i++){
+//            sb.append("\n--"+i+"---");
+//            if(methodHookParam.args[i]!=null){
+//                sb.append(methodHookParam.args[i].getClass()+"---" );
+//                try {
+//                    sb.append(JSON.toJSONString(methodHookParam.args[i]));
+//                }catch (Exception e){
+//                    sb.append(methodHookParam.args[i].toString());
+//                }
+//            }
+//        }
+//        XposedBridge.log(str + "Hook参数:"+ sb.toString());
     }
 
 
@@ -123,21 +118,18 @@ public class StickerMsgHook {
      * @param methodHookParam
      */
     private void sendTie(final XC_MethodHook.MethodHookParam methodHookParam){
+        final List<Face> faceList = ParesFactory.getFaceList();
         ExecutorService singleThread = Executors.newSingleThreadExecutor();
             singleThread.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        //List<Face> faceList = ParesFactory.getFaceList();
-                        List<Face> faceList = ParesFactory.defaultFaces();
-                        XposedBridge.log("face:" + JSON.toJSONString(faceList));
                         if(faceList.size() == 0){
                             invokeOriginalMethod(methodHookParam.method, methodHookParam.thisObject, methodHookParam.args);
                         }else{
                             Object yuanObject = methodHookParam.args[methodHookParam.args.length-1]; //qq表情信息对象
                             Stack<Object> objs = ParesFactory.getFaceList(yuanObject, faceList);
                             for(Object obj:objs){
-                                XposedBridge.log("face:" + JSON.toJSONString(obj));
                                 methodHookParam.args[methodHookParam.args.length - 1] = obj;
                                 invokeOriginalMethod(methodHookParam.method, methodHookParam.thisObject, methodHookParam.args); //发送
                                 Thread.sleep(100);
