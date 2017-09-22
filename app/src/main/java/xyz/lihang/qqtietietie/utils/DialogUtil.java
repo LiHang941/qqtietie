@@ -1,4 +1,4 @@
-package xyz.joker.qqtietietie.utils;
+package xyz.lihang.qqtietietie.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;

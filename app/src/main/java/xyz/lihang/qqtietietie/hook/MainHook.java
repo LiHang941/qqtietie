@@ -1,6 +1,4 @@
-package xyz.joker.qqtietietie.hook;
-
-import java.io.File;
+package xyz.lihang.qqtietietie.hook;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
@@ -8,13 +6,10 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 /**
  *
  */
-public class PokeMsgHook implements IXposedHookLoadPackage {
-    File file = null;
+public class MainHook implements IXposedHookLoadPackage {
     @Override
     public void handleLoadPackage(LoadPackageParam loadPackageParam) throws Throwable {
-        new QQTieTieTiePackageHook(loadPackageParam).initAndHook();
+        new MyPackageHook(loadPackageParam).initAndHook();
         new StickerMsgHook().initAndHook(loadPackageParam);
     }
-
-
 }

@@ -1,21 +1,20 @@
-package xyz.joker.qqtietietie.hook;
+package xyz.lihang.qqtietietie.hook;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 /**
- * QQTieTieTiePackageHook
+ * MyPackageHook
  */
-class QQTieTieTiePackageHook {
+class MyPackageHook {
     private static final String METHOD_NAME_IS_MODULE_ACTIVE = "isModuleActive";
     private final XC_LoadPackage.LoadPackageParam loadPackageParam;
-    private static final String PACKAGENAME = "joker.qqtietietie";
-    private static final String CLASSNAME_MAIN = "xyz.joker.qqtietietie.view.Main";
+    private static final String PACKAGENAME = "xyz.lihang.qqtietietie";
+    private static final String CLASSNAME_MAIN = "xyz.lihang.qqtietietie.weex.SplashActivity";
 
-    public QQTieTieTiePackageHook(XC_LoadPackage.LoadPackageParam loadPackageParam) {
+    public MyPackageHook(XC_LoadPackage.LoadPackageParam loadPackageParam) {
         this.loadPackageParam = loadPackageParam;
     }
 
@@ -30,6 +29,11 @@ class QQTieTieTiePackageHook {
         }
     }
 
+    /**
+     *
+     * @param loadPackageParam
+     * @return
+     */
     private boolean isQQSendPokePackage(XC_LoadPackage.LoadPackageParam loadPackageParam) {
         return loadPackageParam.packageName.equals(PACKAGENAME);
     }

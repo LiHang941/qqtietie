@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">QQ表情贴贴贴</string>
-    <string name="mainContent">QQ表情贴贴贴\n\n作者:joker\n博客:http://www.lihang.xyz/\nGithub:https://github.com/wawa2222/qqtietie</string>
-    <string name="bottomContent">注意:由于时间问题,贴表情的方向默认是向下的。\n下面是微信公众号:小航博客\n关注公众号,了解更多状态</string>
     <string name="tips">提示</string>
     <string name="module_active_tips">模块尚未激活,请前往Xposed框架的模块列表重新勾选并重启手机,否则模块不生效!</string>
     <string name="open_xposed">打开Xposed框架</string>
     <string name="ignore">忽略</string>
+    <string name="main_button">设置</string>
+    <string name="reload">重新加载</string>
+    <string name="load_page_error">加载页面出错！</string>
 </resources>
